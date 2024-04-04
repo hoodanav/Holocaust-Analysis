@@ -1,0 +1,12 @@
+name: shiny-app
+title: shiny-app
+username: 4i3ihp-navya-hooda
+account: 4i3ihp-navya-hooda
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11638167
+bundleId: 8452687
+url: https://4i3ihp-navya-hooda.shinyapps.io/shiny-app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
