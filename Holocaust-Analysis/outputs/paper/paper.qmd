@@ -1,13 +1,11 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Analyzing Ethnic Origins of Holocaust Victims "
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+  - Navya Hooda 
+thanks: "Code and data are available at: https://github.com/hoodanav/Holocaust-Analysis/tree/main and the shiny app is available here: https://4i3ihp-navya-hooda.shinyapps.io/shiny-app/"
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This discussion looks at the Holocaust using numbers to show how certain groups were specifically targeted and suffered immense loss. It considers how data can't fully capture the true impact on people's lives and reminds us to understand history deeply, with respect for individual stories. It's a stark reminder of the need to honor those affected by such tragedies and strive for a better world without them."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -24,196 +22,30 @@ library(palmerpenguins)
 
 
 # Introduction
+The Holocaust, a time of unfathomable horrors and horrific suffering, is still one of the most inhuman events in history as a whole. The data presented offers a quantitative glimpse into the magnitude of this tragedy, providing statistics on the number of deportees, the percentage of victims within different categories, and the overall devastation inflicted upon millions of lives. However, as @citeHealy notes in his  discussion of quantitative data, numbers alone cannot capture the depth of human experience or the profound loss endured by individuals and communities during this horrific time.
 
-You can and should cross-reference sections and sub-sections. 
 
-The remainder of this paper is structured as follows. @sec-data....
 
+# Data 
+To analyze the Holocaust related statistics, data was found from @auschwitz an online source detailing the statistics on the ethnicities and nationalities of the victims,  number of deaths and prisoners. This data was used as csv to build a @citeShiny application using @citeR that summarizes the number of murders and deaths by ethnicities, the percentage of ethnicities targetted and the nationalities most victimized during the Holocaust period. 
 
+## Application Findings
+Demonstrated by the published application, the statistics demonstrate the targeted nature of the Holocaust, with certain groups experiencing significantly higher percentages of murder within their category. For example, the data reveals that 93% of Soviet POWs and 91.3% of Roma (Gypsies) were murdered, showcasing the deliberate and genocidal intent behind the Nazis' actions. Furthermore, the data sheds light on the disproportionate suffering of the Jewish population, with Jews comprising 85% of the total number of victims and 90% of the murdered victims. This stark disparity highlights the central role of anti-Semitism in driving the Holocaust and represents the realities of the tragedy faced by the Jewish community. Overall, the data serves as an important reminder of the horrors of the Holocaust and the importance of learning from this dark chapter in human history.
 
-# Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+## Role of Data in Discussing Tradegies
+The use of data in understanding tragedies by quantifying impact on topics like the Holocaust presents a complex ethical and emotional challenge. Similar to the perspective shared by Healy (2020), the data on the Holocaust statistics provides a quantitative foundation that tries to encapsulate the reality of the horror inflicted upon millions of individuals during the Holocaust. Altough these numbers may seem like a  However, it is crucial to recognize the limitations of such data in capturing the full depth of human suffering and loss experienced during this dark period in history. 
 
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
+# Discussion 
 
-Talk more about it.
+As we grapple with the data and its implications, it is crucial to approach it with sensitivity and mindfulness of the human experiences it represents. The statistics, while important for understanding the scale of the Holocaust, must be complemented by narratives, testimonies, and historical context that humanize the victims and honor their memory. The data serves as a starting point, and a reminder of the necessity of remembrance and understanding to prevent such atrocities from ever happening again.
+Referring to insights from [@citeNYT], it is important to digest data in history that may affect individuals today, with historical context and perspective. This not only allows a better understanding, but a sense of reality and connection to today's problems. In terms of the Holocaust, Bouie (2022) suggests that all data should be humanized and read in that perspective to allow learning, and honouring the people who suffered the tragedies. 
 
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
 
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
+# Conclusion 
 
-analysis_data <- read_csv(here::here("outputs/data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
-
-Talk way more about it. 
-
-
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
-# Results
-
-Our results are summarized in @tbl-modelresults.
-
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
-
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("outputs/models/first_model.rds"))
-```
-
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
-
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
-```
-
-
-
-
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
-```
-
-
-
-\newpage
+As we reflect on the data and grapple with its implications, it is essential to complement our analysis with narratives, testimonies, and historical context that humanize the victims and honor their memory. The data, therefore, serves not as a conclusion but as a starting point for deeper reflection and a reminder of the importance of remembering and understanding the past to ensure such atrocities are never repeated.
 
 
 # References
